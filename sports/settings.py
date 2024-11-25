@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sportsApp',  # Add your app here
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,13 +79,15 @@ WSGI_APPLICATION = 'sports.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sportsDB',
+        'NAME': 'sportsdb',  # Use lowercase as shown in \l output
         'USER': 'admin',
         'PASSWORD': 'db412',
-        'HOST': '/tmp',
-        'PORT': '8888',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+
 
 
 # Password validation
@@ -122,8 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATICFILES_DIRS = [BASE_DIR / 'sportsApp/static']
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Optional: if you have a project-level static folder
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # For collecting static files during deployment
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
