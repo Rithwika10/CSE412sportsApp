@@ -141,6 +141,28 @@ header nav ul li a:hover {
     color: #666;
 }
 
+.data {
+    padding: 20px;
+    background-color: black;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 90%;
+    color: white;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table th, .table td {
+    border: 1px solid white;
+    padding: 10px;
+    text-align: left;
+    color: white;
+}
+
 /* Footer */
 footer {
     background-color: #333;

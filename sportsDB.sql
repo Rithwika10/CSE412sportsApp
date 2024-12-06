@@ -406,7 +406,7 @@ ALTER TABLE public.django_session OWNER TO admin;
 
 CREATE TABLE public.equipment (
     equipment_id integer NOT NULL,
-    type character varying(100),
+    etype character varying(100),
     cost numeric(10,2),
     sport_id integer
 );
@@ -422,7 +422,7 @@ CREATE TABLE public.location (
     location_id integer NOT NULL,
     name character varying(100),
     size integer,
-    type character varying(50)
+    ltype character varying(50)
 );
 
 
@@ -589,6 +589,78 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 22	Can change session	6	change_session
 23	Can delete session	6	delete_session
 24	Can view session	6	view_session
+25	Can add auth group	7	add_authgroup
+26	Can change auth group	7	change_authgroup
+27	Can delete auth group	7	delete_authgroup
+28	Can view auth group	7	view_authgroup
+29	Can add auth group permissions	8	add_authgrouppermissions
+30	Can change auth group permissions	8	change_authgrouppermissions
+31	Can delete auth group permissions	8	delete_authgrouppermissions
+32	Can view auth group permissions	8	view_authgrouppermissions
+33	Can add auth permission	9	add_authpermission
+34	Can change auth permission	9	change_authpermission
+35	Can delete auth permission	9	delete_authpermission
+36	Can view auth permission	9	view_authpermission
+37	Can add auth user	10	add_authuser
+38	Can change auth user	10	change_authuser
+39	Can delete auth user	10	delete_authuser
+40	Can view auth user	10	view_authuser
+41	Can add auth user groups	11	add_authusergroups
+42	Can change auth user groups	11	change_authusergroups
+43	Can delete auth user groups	11	delete_authusergroups
+44	Can view auth user groups	11	view_authusergroups
+45	Can add auth user user permissions	12	add_authuseruserpermissions
+46	Can change auth user user permissions	12	change_authuseruserpermissions
+47	Can delete auth user user permissions	12	delete_authuseruserpermissions
+48	Can view auth user user permissions	12	view_authuseruserpermissions
+49	Can add city	13	add_city
+50	Can change city	13	change_city
+51	Can delete city	13	delete_city
+52	Can view city	13	view_city
+53	Can add crew	14	add_crew
+54	Can change crew	14	change_crew
+55	Can delete crew	14	delete_crew
+56	Can view crew	14	view_crew
+57	Can add django admin log	15	add_djangoadminlog
+58	Can change django admin log	15	change_djangoadminlog
+59	Can delete django admin log	15	delete_djangoadminlog
+60	Can view django admin log	15	view_djangoadminlog
+61	Can add django content type	16	add_djangocontenttype
+62	Can change django content type	16	change_djangocontenttype
+63	Can delete django content type	16	delete_djangocontenttype
+64	Can view django content type	16	view_djangocontenttype
+65	Can add django migrations	17	add_djangomigrations
+66	Can change django migrations	17	change_djangomigrations
+67	Can delete django migrations	17	delete_djangomigrations
+68	Can view django migrations	17	view_djangomigrations
+69	Can add django session	18	add_djangosession
+70	Can change django session	18	change_djangosession
+71	Can delete django session	18	delete_djangosession
+72	Can view django session	18	view_djangosession
+73	Can add equipment	19	add_equipment
+74	Can change equipment	19	change_equipment
+75	Can delete equipment	19	delete_equipment
+76	Can view equipment	19	view_equipment
+77	Can add person	20	add_person
+78	Can change person	20	change_person
+79	Can delete person	20	delete_person
+80	Can view person	20	view_person
+81	Can add player	21	add_player
+82	Can change player	21	change_player
+83	Can delete player	21	delete_player
+84	Can view player	21	view_player
+85	Can add sport	22	add_sport
+86	Can change sport	22	change_sport
+87	Can delete sport	22	delete_sport
+88	Can view sport	22	view_sport
+89	Can add location	23	add_location
+90	Can change location	23	change_location
+91	Can delete location	23	delete_location
+92	Can view location	23	view_location
+93	Can add location city	24	add_locationcity
+94	Can change location city	24	change_locationcity
+95	Can delete location city	24	delete_locationcity
+96	Can view location city	24	view_locationcity
 \.
 
 
@@ -664,6 +736,24 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 4	auth	user
 5	contenttypes	contenttype
 6	sessions	session
+7	sportsApp	authgroup
+8	sportsApp	authgrouppermissions
+9	sportsApp	authpermission
+10	sportsApp	authuser
+11	sportsApp	authusergroups
+12	sportsApp	authuseruserpermissions
+13	sportsApp	city
+14	sportsApp	crew
+15	sportsApp	djangoadminlog
+16	sportsApp	djangocontenttype
+17	sportsApp	djangomigrations
+18	sportsApp	djangosession
+19	sportsApp	equipment
+20	sportsApp	person
+21	sportsApp	player
+22	sportsApp	sport
+23	sportsApp	location
+24	sportsApp	locationcity
 \.
 
 
@@ -690,6 +780,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 16	auth	0011_update_proxy_permissions	2024-11-18 23:31:18.29995-08
 17	auth	0012_alter_user_first_name_max_length	2024-11-18 23:31:18.311876-08
 18	sessions	0001_initial	2024-11-18 23:31:18.384282-08
+19	sportsApp	0001_initial	2024-11-29 23:42:38.586177-08
 \.
 
 
@@ -705,7 +796,7 @@ COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 -- Data for Name: equipment; Type: TABLE DATA; Schema: public; Owner: keegan
 --
 
-COPY public.equipment (equipment_id, type, cost, sport_id) FROM stdin;
+COPY public.equipment (equipment_id, etype, cost, sport_id) FROM stdin;
 1	court shoes	150.00	3
 2	court shoes	120.00	2
 3	paddle	15.00	10
@@ -723,7 +814,7 @@ COPY public.equipment (equipment_id, type, cost, sport_id) FROM stdin;
 -- Data for Name: location; Type: TABLE DATA; Schema: public; Owner: keegan
 --
 
-COPY public.location (location_id, name, size, type) FROM stdin;
+COPY public.location (location_id, name, size, ltype) FROM stdin;
 1	Arizona Athletic Grounds	1	outside
 2	Barney Family Sports Complex	2	outside
 3	Rose Mofford Sports Complex	1	inside
@@ -827,7 +918,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 24, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 96, true);
 
 
 --
@@ -862,14 +953,14 @@ SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 6, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 24, true);
 
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 18, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 19, true);
 
 
 --

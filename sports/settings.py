@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'sports.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sportsdb',  # Use lowercase as shown in \l output
+        'NAME': 'sportsDB',  # Use lowercase as shown in \l output
         'USER': 'admin',
         'PASSWORD': 'db412',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': '/tmp', # Default is localhost
+        'PORT': '8888', # Default is 5432
     }
 }
 
