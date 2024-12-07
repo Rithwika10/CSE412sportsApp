@@ -60,15 +60,16 @@ def sport_signup(request, sport_id):
 
 @login_required
 def signup_player(request, sport_id):
+    """Handle player sign-up confirmation."""
     sport = get_object_or_404(Sport, sport_id=sport_id)
     if request.method == 'POST':
         # Create a new Player instance
         Player.objects.create(
-            person=None,  # Replace `None` with logic to associate a user
+            person=None,  # Replace `None` with logic to associate the user with a person
             stats="Signed Up",
             division="Default Division"
         )
-        return redirect('signup_success')  # Redirect to confirmation page
+        return redirect('signup_success')  # Redirect to the confirmation page
     return render(request, 'sportsApp/signup_player.html', {'sport': sport})
 
 
