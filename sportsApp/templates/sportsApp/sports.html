@@ -1,0 +1,24 @@
+{% extends 'sportsApp/base.html' %}
+
+{% block title %}Explore Sports{% endblock %}
+
+{% block content %}
+<h2>Explore Sports</h2>
+<div class="row">
+    {% if sports %}
+        {% for sport in sports %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ sport.name }}</h3>
+                        <p>{{ sport.numplayers }} players needed | Equipment required: {{ sport.equipment_set.first.etype }}</p>
+                        <a href="{% url 'sport_signup' sport.sport_id %}" class="btn btn-success">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No sports available to explore.</p>
+    {% endif %}
+</div>
+{% endblock %}

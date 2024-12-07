@@ -186,14 +186,15 @@ class Person(models.Model):
 
 
 class Player(models.Model):
-    player_id = models.IntegerField(primary_key=True)
+    player_id = models.AutoField(primary_key=True)  # Auto-increment ID
     person = models.ForeignKey(Person, models.DO_NOTHING, blank=True, null=True)
     stats = models.CharField(max_length=100, blank=True, null=True)
     division = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'player'
+
+
 
 
 class Sport(models.Model):

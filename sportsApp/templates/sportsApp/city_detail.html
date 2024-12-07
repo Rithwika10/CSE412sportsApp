@@ -1,0 +1,17 @@
+{% extends 'sportsApp/base.html' %}
+
+{% block title %}City Details{% endblock %}
+
+{% block content %}
+<h2>Details for {{ city.name }}</h2>
+<p>County: {{ city.county }}</p>
+<p>State: {{ city.state }}</p>
+
+<h3>Sports Available in {{ city.name }}</h3>
+<ul>
+    {% for sport in sports_in_city %}
+    <li>{{ sport.name }} ({{ sport.numplayers }} players required)</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

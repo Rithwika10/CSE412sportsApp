@@ -1,0 +1,15 @@
+{% extends 'sportsApp/base.html' %}
+
+{% block title %}Sign Up as Player{% endblock %}
+
+{% block content %}
+<h2>Sign Up as a Player for {{ sport.name }}</h2>
+<p>Players Required: {{ sport.numplayers }}</p>
+<p>Location: {{ sport.location.name }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Confirm Sign Up</button>
+    <a href="{% url 'sports' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

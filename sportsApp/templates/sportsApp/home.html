@@ -3,6 +3,69 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Welcome to the Sports Platform</h2>
-<p>Find and join exciting sports activities near you!</p>
+{% if user.is_authenticated %}
+<!-- Hero Section -->
+<section id="home" class="hero mb-5">
+    <div class="hero-content text-center">
+        <h2>Welcome to the Sports Platform</h2>
+        <p>Find and join exciting sports activities near you!</p>
+        <form method="get" class="search-bar d-flex justify-content-center">
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</section>
+
+<!-- Data Section -->
+<section id="data" class="data mb-5">
+    <div class="data-content">
+        {% if cities %}
+            <h3>Available Cities</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>County</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for city in cities %}
+                        <tr>
+                            <td><a href="{% url 'city_detail' city.city_id %}">{{ city.name }}</a></td>
+                            <td>{{ city.county }}</td>
+                            <td>{{ city.state }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No cities available.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Sports Section -->
+<section id="sports" class="sports">
+    <h2>Explore Sports</h2>
+    <div class="row">
+        {% if sports %}
+            {% for sport in sports %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ sport.name }}</h3>
+                            <p>{{ sport.numplayers }} players needed | Equipment required: {{ sport.equipment_set.first.etype }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No sports available to explore.</p>
+        {% endif %}
+    </div>
+</section>
+{% else %}
+<p>Please <a href="{% url 'login' %}">log in</a> or <a href="{% url 'register' %}">register</a> to view the content.</p>
+{% endif %}
 {% endblock %}

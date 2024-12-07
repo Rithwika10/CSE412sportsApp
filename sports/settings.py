@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sportsApp',  # Add your app here
+    'sportsApp',  # Your app
 ]
+
 
 
 
@@ -47,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Required for login
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -79,13 +80,14 @@ WSGI_APPLICATION = 'sports.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sportsDB',  # Use lowercase as shown in \l output
+        'NAME': 'sportsdb',
         'USER': 'admin',
         'PASSWORD': 'db412',
-        'HOST': '/tmp', # Default is localhost
-        'PORT': '8888', # Default is 5432
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 
@@ -134,4 +136,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']  # Optional: if you have a project-leve
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # For collecting static files during deployment
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = '/login/'  # URL for the login page
+LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect to login page after logout
 
